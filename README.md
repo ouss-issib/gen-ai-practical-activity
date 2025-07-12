@@ -53,3 +53,38 @@ spring.ai.openai.api-key=sk-xxxxxxx
 spring.ai.openai.chat.options.model=gpt-4o
 spring.ai.openai.image.options.model=dall-e-3
 ```
+
+
+## ▶️ Instructions d’exécution
+
+1. **Cloner le projet** :
+   ```bash
+   git clone https://github.com/ouss-issib/gen-ai-practical-activity.git
+   cd gen-ai-practical-activity
+
+2. **Installer les dependences Flutter** :
+   ```bash
+   mvn clean install
+   mvn spring-boot:run
+
+3. **Tester les endpoints avec Postman ou curl** :
+ --> curl -X GET http://localhost:9090/chat?query=bonjour
+
+
+## 📸 Captures d’écran
+
+| Zero Shot prompt Question | Zero Shot prompt Response | withMessages | askAgent |
+|---|---|---|---|
+| ![Question ](./captures/zero-shot-question.png)  | ![Response](./captures/zero-shot-response.png) | ![withMessages](./captures/withMessages.png) | ![askAgent](./captures/askAgent.png)|
+
+| Strem | No Stream | Multi Modal Agent |
+|---|---|---|
+| ![stream](./captures/stream.png) | ![nostream](./captures/nostream.png) | ![Multi Model](./captures/multimodal.png) |
+
+| Strem | No Stream | 
+|---|---|
+| ![stream](./captures/stream.png) | ![nostream](./captures/nostream.png) |
+
+| generated Url Image | Image Generated | 
+|---|---|
+| ![Generated Image Url](./captures/generateImageUrl.png) | ![Generated Image](./captures/image-generated.png) |
