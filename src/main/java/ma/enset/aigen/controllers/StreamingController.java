@@ -5,36 +5,42 @@ import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
-import org.springframework.ai.chat.messages.AssistantMessage;
-import org.springframework.ai.chat.messages.Message;
-import org.springframework.ai.chat.messages.UserMessage;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
 
-import java.util.List;
+import javax.print.attribute.standard.Media;
+import java.awt.*;
+
 @RestController
-public class AiGenStructuredController {
+public class StreamingController {
+
     private ChatClient chatClient;
 
 
-    public AiGenStructuredController(ChatClient.Builder chatClient, ChatMemory chatMemory) {
+    public StreamingController(ChatClient.Builder chatClient, ChatMemory chatMemory) {
         this.chatClient = chatClient
                 .defaultAdvisors(new SimpleLoggerAdvisor())
                 .defaultAdvisors(MessageChatMemoryAdvisor.builder(chatMemory).build())
                 .build();
     }
 
-    @GetMapping("/askAgent")
-    public MovieList askLLM(String query) {
-        String systemMessage = """
-                Vous êtes un spécialiste dans le domaine du cinéma
-                répond à la question de l'utilisateur à ce propos
-                """;
+    @GetMapping(value = "/stream",produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<String> stream(String query) {
         return chatClient.prompt()
-                .system(systemMessage)
+                .user(query)
+                .stream()
+                .content();
+
+    }
+    @GetMapping("/nostream")
+    public String nostream(String query) {
+
+        return chatClient.prompt()
                 .user(query)
                 .call()
-                .entity(MovieList.class);
+                .content();
 
     }
 }
