@@ -81,10 +81,6 @@ spring.ai.openai.image.options.model=dall-e-3
 |---|---|---|
 | ![stream](./captures/stream.png) | ![nostream](./captures/nostream.png) | ![Multi Model](./captures/multimodal.png) |
 
-| Strem | No Stream | 
-|---|---|
-| ![stream](./captures/stream.png) | ![nostream](./captures/nostream.png) |
-
 | generated Url Image | Image Generated | 
 |---|---|
 | ![Generated Image Url](./captures/generateImageUrl.png) | ![Generated Image](./captures/image-generated.png) |
